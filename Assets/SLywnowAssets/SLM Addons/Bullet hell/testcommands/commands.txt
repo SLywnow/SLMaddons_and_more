@@ -1,0 +1,13 @@
+settextstring::0::vw//getalsl//boss1N;;
+settextstring::1::vw//getalsl//boss1D;;
+setimage::0::0;;
+cc::anim_showboss;;
+runbh::0::vw//getpoint//win::vw//getpoint//lose;;
+
+setpoint::win;;
+showtext::0;;
+runcommand::0;;
+
+setpoint::lose;;
+showtext::1;;
+runcommand::0;;

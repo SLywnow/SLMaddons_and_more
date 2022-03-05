@@ -1,0 +1,10 @@
+{
+    "words": [
+        "Daiyousei",
+        "Best friend"
+    ],
+    "keys": [
+        "boss1N",
+        "boss1D"
+    ]
+}
