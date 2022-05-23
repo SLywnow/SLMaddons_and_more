@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
+using SLywnow;
 
 [RequireComponent(typeof(RectTransform))]
 public class SDia_Main : MonoBehaviour
@@ -12,6 +13,7 @@ public class SDia_Main : MonoBehaviour
     public Transform mainParent;
     public Transform backgroundParent;
     public bool spawnOnCenter;
+    [ShowFromBool(nameof(spawnOnCenter),false)]
     public Vector2 defaultSpawnPoint;
     public bool HideBlocksOutsideScreen = true;
 
@@ -25,11 +27,6 @@ public class SDia_Main : MonoBehaviour
     UILineConnector gostline;
     Vector3 startMpos;
     Vector2 startIpos;
-
-	private void Start()
-	{
-        
-    }
 
 	private void Update()
 	{

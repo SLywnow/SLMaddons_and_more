@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SDia_DragObject : EventTrigger
 {
@@ -25,3 +28,20 @@ public class SDia_DragObject : EventTrigger
 		
 	}
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(SDia_DragObject))]
+[CanEditMultipleObjects]
+public class SDia_DragObject_Editor : Editor
+{
+	void OnEnable()
+	{
+		
+	}
+
+	public override void OnInspectorGUI()
+	{
+		
+	}
+}
+#endif

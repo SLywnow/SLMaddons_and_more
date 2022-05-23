@@ -8,7 +8,7 @@ using SLywnow;
 [RequireComponent(typeof(CanvasGroup))]
 public class SDia_Block : MonoBehaviour
 {
-	public SDia_Main main;
+	[HideInInspector] public SDia_Main main;
 	public SDia_DragObject dragObject;
 	public List<SDia_Joint> enters;
     public List<SDia_Joint> exits;

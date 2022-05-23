@@ -23,14 +23,6 @@ public class SDia_Joint : MonoBehaviour
 		connections = new List<string>();
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace))
-		{
-
-		}
-	}
-
 	public SDia_Block getConnection(int id)
 	{
 		SDia_Block ret = null;
