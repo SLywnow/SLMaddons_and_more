@@ -5,7 +5,7 @@ BetterStreamingAssets needed https://github.com/gwiazdorrr/BetterStreamingAssets
 
 Slywnow_basic needed https://github.com/SLywnow/slywnow_basic
 
-[SLywnow Diagrams readme](https://github.com/SLywnow/SLMaddons_and_more/blob/main/Assets/SLywnowAssets/SDiagrams/README.md)\
+[SLywnow Diagrams readme](https://github.com/SLywnow/SLMaddons_and_more/blob/main/Assets/SLywnowAssets/SDiagrams/README.md)
 
 Addons:
 
