@@ -15,12 +15,12 @@ public class SDia_DragObject : EventTrigger
 	public override void OnBeginDrag(PointerEventData data)
 	{
 		startMpos = Input.mousePosition;
-		statIpos = main.anchoredPosition;
+		statIpos = main.position;
 	}
 
 	public override void OnDrag(PointerEventData data)
 	{
-		main.anchoredPosition = statIpos - (Vector2)(startMpos - Input.mousePosition);
+		main.position = statIpos - (Vector2)(startMpos - Input.mousePosition);
 	}
 
 	public override void OnEndDrag(PointerEventData data)

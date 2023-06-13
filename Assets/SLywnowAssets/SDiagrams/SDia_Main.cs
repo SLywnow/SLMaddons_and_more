@@ -25,8 +25,6 @@ public class SDia_Main : MonoBehaviour
 
     RectTransform gost;
     UILineConnector gostline;
-    Vector3 startMpos;
-    Vector2 startIpos;
 
 	private void Update()
 	{
@@ -43,14 +41,10 @@ public class SDia_Main : MonoBehaviour
                 RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)backgroundParent, Input.mousePosition, Camera.current, out pos);
                 gost.anchoredPosition = pos;
                 gostline.transforms = new RectTransform[] { gost, (RectTransform)currentJoint.transform };
-
-                startMpos = Input.mousePosition;
-                startIpos = gost.anchoredPosition;
             }
             else
 			{
-                gost.anchoredPosition = startIpos - (Vector2)(startMpos - Input.mousePosition);
-
+                gost.position = Input.mousePosition;
             }
 		}
         else
