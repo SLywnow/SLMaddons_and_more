@@ -16,6 +16,7 @@ public class SHelp : EventTrigger
 	public Color textColor = Color.black;
 	public Color bgColor = Color.white;
 	public float delayBeforeShow;
+	public float delayBeforeHide=-1;
 	public Vector2 offset;
 	public enum tpe { topLeft, topCenter, topRight, Custom};
 	public tpe posType = tpe.topCenter;
@@ -27,6 +28,7 @@ public class SHelp : EventTrigger
 	public KeyCode checkKey;
 
 	float timer=0;
+	float dietimer=-1;
 	bool show;
 	GameObject obj;
 
@@ -53,6 +55,22 @@ public class SHelp : EventTrigger
 		{
 			obj.SetActive(true);
 		}
+
+		if (dietimer != -1)
+			if (dietimer > 0)
+			{
+				dietimer -= Time.deltaTime;
+			}
+			else
+			{
+				dietimer = -1;
+				DeleteObject();
+			}
+	}
+
+	private void OnDestroy()
+	{
+		DeleteObject();
 	}
 
 	void SpawnObject()
@@ -93,6 +111,33 @@ public class SHelp : EventTrigger
 		obj.GetComponent<Image>().color = bgColor;
 		obj.GetComponentInChildren<Text>().text = text;
 		obj.GetComponentInChildren<Text>().color = textColor;
+		int max = 10;
+		Transform canvpar=null;
+		Transform curpar=transform.parent;
+		while (canvpar==null && max>0)
+		{
+			if (curpar != null)
+			{
+				if (curpar.GetComponent<Canvas>() != null)
+				{
+					canvpar = curpar;
+					max = 0;
+				}
+				else
+				{
+					curpar = curpar.parent;
+				}
+				max--;
+			}
+			else
+				max = 0;
+		}
+
+		if (delayBeforeHide > 0)
+			dietimer = delayBeforeHide;
+
+		if (canvpar != null)
+			obj.transform.SetParent(canvpar);
 	}
 
 	void DeleteObject()
@@ -127,6 +172,7 @@ public class SHelp_Editor : Editor
 	SerializedProperty textColor;
 	SerializedProperty bgColor;
 	SerializedProperty delayBeforeShow;
+	SerializedProperty delayBeforeHide;
 	SerializedProperty posType;
 	SerializedProperty offset;
 	SerializedProperty anchorMin;
@@ -142,6 +188,7 @@ public class SHelp_Editor : Editor
 		textColor = serializedObject.FindProperty("textColor");
 		bgColor = serializedObject.FindProperty("bgColor");
 		delayBeforeShow = serializedObject.FindProperty("delayBeforeShow");
+		delayBeforeHide = serializedObject.FindProperty("delayBeforeHide");
 		posType = serializedObject.FindProperty("posType");
 		offset = serializedObject.FindProperty("offset");
 		anchorMin = serializedObject.FindProperty("anchorMin");
@@ -160,6 +207,7 @@ public class SHelp_Editor : Editor
 		EditorGUILayout.PropertyField(textColor);
 		EditorGUILayout.PropertyField(bgColor);
 		EditorGUILayout.PropertyField(delayBeforeShow);
+		EditorGUILayout.PropertyField(delayBeforeHide);
 		EditorGUILayout.PropertyField(posType);
 		if (tg.posType == SHelp.tpe.Custom)
 		{

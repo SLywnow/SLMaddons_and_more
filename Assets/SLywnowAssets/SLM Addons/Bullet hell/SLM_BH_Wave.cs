@@ -12,18 +12,24 @@ public class SLM_BH_Wave : MonoBehaviour
     public List<SLM_BH_Wave_WavePreset> presets;
     
     List<SLM_BH_Wave_Wave> waveSettings;
-    [HideInInspector] public List<SLM_BH_Enemy> enemyslist;
+    [HideInInspector] 
+    public List<SLM_BH_Enemy> enemyslist;
     int curid = -1;
-    [HideInInspector] public int curwave = -1;
-    [HideInInspector] public int maxwave = 0;
+    [HideInInspector] 
+    public int curwave = -1;
+    [HideInInspector] 
+    public int maxwave = 0;
     bool waverun = false;
     int waveencount = 0;
     int waveenrun = 0;
     float sttimer=-1;
     int stid;
-    [HideInInspector] public float maxtimeWave;
-    [HideInInspector] public float time;
-    [HideInInspector] public float maxenemy;
+    [HideInInspector] 
+    public float maxtimeWave;
+    [HideInInspector] 
+    public float time;
+    [HideInInspector] 
+    public float maxenemy;
 
     void Start()
     {
@@ -98,6 +104,8 @@ public class SLM_BH_Wave : MonoBehaviour
             waveenrun = 0;
             maxenemy = 0;
             waveSettings[id].onStart.Invoke();
+            StopAllCoroutines();
+            
             if (waveSettings[id].whenWaveEnds == SLM_BH_Wave_Wave.waveend.timer || waveSettings[id].whenWaveEnds == SLM_BH_Wave_Wave.waveend.any)
             {
                 time = waveSettings[id].time;
@@ -156,7 +164,7 @@ public class SLM_BH_Wave : MonoBehaviour
         while (timeD < timeDelay)
         {
             timeD += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         for (int i = 0; i < count; i++)
@@ -183,7 +191,7 @@ public class SLM_BH_Wave : MonoBehaviour
                 while (timeO < timeOffset)
                 {
                     timeO += Time.deltaTime;
-                    yield return new WaitForEndOfFrame();
+                    yield return null;
                 }
             }
             else
@@ -191,7 +199,7 @@ public class SLM_BH_Wave : MonoBehaviour
         }
 
         waveenrun++;
-        if (waveenrun == waveencount)
+        if (waveenrun >= waveencount)
             waverun = true;
 
         yield break;
@@ -204,7 +212,7 @@ public class SLM_BH_Wave : MonoBehaviour
         while (timeD < timeDelay)
         {
             timeD += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         Vector2 v = point;
@@ -236,7 +244,7 @@ public class SLM_BH_Wave : MonoBehaviour
                 while (timeO < timeOffset)
                 {
                     timeO += Time.deltaTime;
-                    yield return new WaitForEndOfFrame();
+                    yield return null;
                 }
             }
             else
@@ -244,7 +252,7 @@ public class SLM_BH_Wave : MonoBehaviour
         }
 
         waveenrun++;
-        if (waveenrun == waveencount)
+        if (waveenrun >= waveencount)
             waverun = true;
 
         yield break;
@@ -257,7 +265,7 @@ public class SLM_BH_Wave : MonoBehaviour
         while (timeD < timeDelay)
         {
             timeD += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         if (line != null)
@@ -286,7 +294,7 @@ public class SLM_BH_Wave : MonoBehaviour
                     while (timeO < timeOffset)
                     {
                         timeO += Time.deltaTime;
-                        yield return new WaitForEndOfFrame();
+                        yield return null;
                     }
                 }
                 else
@@ -318,7 +326,7 @@ public class SLM_BH_Wave : MonoBehaviour
                     while (timeO < timeOffset)
                     {
                         timeO += Time.deltaTime;
-                        yield return new WaitForEndOfFrame();
+                        yield return null;
                     }
                 }
                 else
@@ -350,7 +358,7 @@ public class SLM_BH_Wave : MonoBehaviour
                     while (timeO < timeOffset)
                     {
                         timeO += Time.deltaTime;
-                        yield return new WaitForEndOfFrame();
+                        yield return null;
                     }
                 }
                 else
@@ -359,7 +367,7 @@ public class SLM_BH_Wave : MonoBehaviour
         }
 
         waveenrun++;
-        if (waveenrun == waveencount)
+        if (waveenrun >= waveencount)
             waverun = true;
 
         yield break;
@@ -405,6 +413,7 @@ public class SLM_BH_Wave : MonoBehaviour
             else if (waveSettings[curwave].afterWaveEnds == SLM_BH_Wave_Wave.wavenext.stop)
             {
                 blocknextwave = true;
+                waverun = false;
             }
 
             if (!blocknextwave)
@@ -427,6 +436,7 @@ public class SLM_BH_Wave : MonoBehaviour
                     else if (presets[curid].onEnd == SLM_BH_Wave_WavePreset.onend.nothing)
                     {
                         curwave = -1;
+                        waverun = false;
                     }
                 }
             }
@@ -521,5 +531,5 @@ public class SLM_BH_Wave_EnemyLine
     public bool forceEasyAPI;
     public Vector2 EasyAPIDirection;
 
-    [Tooltip ("must be same as count")] public List<SLM_BH_UI> autosetUi;
+    [Tooltip ("Must be same as count")] public List<SLM_BH_UI> autosetUi;
 }

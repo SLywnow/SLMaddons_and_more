@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using AutoLangSLywnow;
+using SLywnow;
 
 public class SLM_BH_UI : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class SLM_BH_UI : MonoBehaviour
     float savecur = 0;
     bool havesome;
 
-    private void Update()
+	private void Update()
     {
         if (controll == null && wave == null && enemy == null && copyfrom != null)
         {
@@ -87,14 +88,19 @@ public class SLM_BH_UI : MonoBehaviour
             if (options.UIOption == SLM_BH_UI_Opt.uitpe.image)
                 options.image.fillAmount = percent;
 
+            //dont touch that!!!
             else if (options.UIOption == SLM_BH_UI_Opt.uitpe.slider)
-                options.slider.value = percent;
+            {
+                options.slider.maxValue = max;
+                options.slider.minValue = 0;
+                options.slider.value = cur;
+            }
 
             else if (options.UIOption == SLM_BH_UI_Opt.uitpe.objects)
             {
                 if (options.parerent.childCount > savecur)
                 {
-                    for (int i = options.parerent.childCount - 1; i > savecur - 1 && i>=0; i--)
+                    for (int i = options.parerent.childCount - 1; i > savecur - 1 && i >= 0; i--)
                         Destroy(options.parerent.GetChild(i).gameObject);
                 }
                 else if (options.parerent.childCount < savecur)
@@ -137,21 +143,34 @@ public class SLM_BH_UI_Opt
 {
     public enum uitpe {off, objects, image, slider };
     public uitpe UIOption;
+    [ShowFromEnum(nameof(UIOption),1)]
     public GameObject obj;
+    [ShowFromEnum(nameof(UIOption), 1)]
     public Transform parerent;
+    [ShowFromEnum(nameof(UIOption), 2)]
     public Image image;
+    [ShowFromEnum(nameof(UIOption), 3)]
     public Slider slider;
 
     public enum txttpe { off, curMax, cur, percent };
+    [Space(10)]
     public txttpe textOption;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public Text text;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public bool useALSLForPrefix;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public bool useALSLForSuffix;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public string separator = "/";
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public string prefix;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public string suffix;
+    [ShowFromEnum(nameof(textOption), 0, true)]
     public int round = 2;
 
+    [Space(10)]
     public float defaultCur=0;
     public float defaultMax=100;
 }

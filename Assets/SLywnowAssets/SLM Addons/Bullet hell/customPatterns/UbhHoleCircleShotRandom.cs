@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 /// <summary>
 /// Ubh hole circle shot.
 /// </summary>
-[AddComponentMenu("UniBulletHell/Shot Pattern/Hole Circle Shot")]
+[AddComponentMenu("UniBulletHell/Shot Pattern/Random Hole Circle Shot")]
 public class UbhHoleCircleShotRandom : UbhBaseShot
 {
     [Header("===== HoleCircleShot Settings =====")]
